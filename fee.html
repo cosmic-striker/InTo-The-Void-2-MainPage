@@ -156,184 +156,101 @@
 </div>
 </div>
 </header>
-<main class="relative pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto min-h-screen">
-<!-- Progress Bar (System Sync Meter) -->
-<header class="mb-16 text-center">
-<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-xl uppercase tracking-tighter mb-8">
-                ENTRY_PROTOCOL_<span class="text-primary-fixed-dim">V2.0</span>
-</h1>
-<div class="max-w-2xl mx-auto px-4">
-<div class="flex justify-between items-end mb-2 font-label-caps text-[10px]">
-<span class="text-primary-fixed-dim glow-cyan">SYNC_STATUS: INITIALIZING</span>
-<span class="text-on-surface-variant">STEP 02 / 04</span>
+<main class="relative pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto min-h-screen">
+<style>
+@keyframes rgb-border {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.gaming-clip {
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+}
+.gaming-input-clip {
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+</style>
+
+<div class="relative z-10 w-full mt-10">
+    <div class="text-center mb-16">
+        <h1 class="font-display-lg text-4xl md:text-6xl text-center font-black tracking-tighter uppercase mb-4 relative text-white" style="text-shadow: 2px 0 #00dbe9, -2px 0 #d05bff;">
+            NODE_REGISTRATION
+        </h1>
+        <p class="font-label-caps text-primary/80 uppercase tracking-widest text-sm">Secure your connection to the grid</p>
+    </div>
+
+    <!-- Gaming Panel Container -->
+    <div class="relative p-[2px] gaming-clip group">
+        <!-- Animated RGB Border Background -->
+        <div class="absolute inset-0 z-[-1] bg-gradient-to-r from-[#00dbe9] via-[#d05bff] to-[#00dbe9] bg-[length:200%_200%] animate-[rgb-border_3s_ease_infinite] opacity-70 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <!-- Inner Black Panel -->
+        <div class="bg-black/90 backdrop-blur-xl p-10 gaming-clip relative z-10 h-full">
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-8 relative text-white">
+                
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Name</label>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="Enter your full name" required type="text"/>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-[10px] text-secondary uppercase tracking-widest">Email ID</label>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="user@domain.com" required type="email"/>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Mobile Number</label>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="+91 9876543210" required type="tel"/>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-[10px] text-secondary uppercase tracking-widest">College Name</label>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="Name of Institution" required type="text"/>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Degree</label>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="E.g., B.Tech, B.E, B.Sc" required type="text"/>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-[10px] text-secondary uppercase tracking-widest">Department</label>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="E.g., Computer Science, IT" required type="text"/>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Year of Study</label>
+                    <div class="relative">
+                        <select class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none appearance-none" required>
+                            <option value="" class="bg-black text-white">Select Year</option>
+                            <option value="1" class="bg-black text-white">1st Year</option>
+                            <option value="2" class="bg-black text-white">2nd Year</option>
+                            <option value="3" class="bg-black text-white">3rd Year</option>
+                            <option value="4" class="bg-black text-white">4th Year</option>
+                        </select>
+                        <span class="material-symbols-outlined absolute right-4 top-4 pointer-events-none text-primary/50">expand_more</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="font-label-caps text-[10px] text-secondary uppercase tracking-widest">Location</label>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="City / District" required type="text"/>
+                </div>
+
+                <div class="flex flex-col gap-2 md:col-span-2">
+                    <label class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Pincode</label>
+                    <input class="gaming-input-clip w-full md:w-1/2 bg-surface-container-lowest/50 border border-primary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="Postal Code" required type="text"/>
+                </div>
+
+                <div class="md:col-span-2 mt-12 flex justify-center">
+                    <button type="submit" class="relative px-16 py-6 bg-primary/20 text-primary font-label-caps font-bold text-lg uppercase tracking-[0.2em] hover:bg-primary hover:text-black transition-all duration-300 shadow-[0_0_20px_rgba(0,219,233,0.3)] hover:shadow-[0_0_40px_rgba(0,219,233,0.8)] gaming-clip border border-primary">
+                        INITIALIZE_UPLINK
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden border border-primary/20 relative">
-<div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(0,219,233,0.1)_10px,rgba(0,219,233,0.1)_20px)]"></div>
-<div class="h-full bg-primary-fixed-dim w-[50%] relative shadow-[0_0_10px_#00dbe9]">
-<div class="absolute top-0 right-0 h-full w-2 bg-white animate-pulse"></div>
-</div>
-</div>
-<div class="flex justify-between mt-4">
-<div class="flex flex-col items-center">
-<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
-<span class="font-label-caps text-[9px] mt-1 text-primary">IDENTITY</span>
-</div>
-<div class="flex flex-col items-center">
-<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">sell</span>
-<span class="font-label-caps text-[9px] mt-1 text-primary">TIER</span>
-</div>
-<div class="flex flex-col items-center">
-<span class="material-symbols-outlined text-on-surface-variant/40 text-[18px]">groups</span>
-<span class="font-label-caps text-[9px] mt-1 text-on-surface-variant/40">TEAM</span>
-</div>
-<div class="flex flex-col items-center">
-<span class="material-symbols-outlined text-on-surface-variant/40 text-[18px]">summarize</span>
-<span class="font-label-caps text-[9px] mt-1 text-on-surface-variant/40">SUMMARY</span>
-</div>
-</div>
-</div>
-</header>
-<!-- Tier Selection Section -->
-<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mt-12">
-<!-- Student Tier -->
-<div class="group relative bg-surface-container-lowest/60 backdrop-blur-xl border border-primary/20 p-8 flex flex-col justify-between hover:border-primary-fixed-dim/60 transition-all duration-300">
-<div class="absolute top-0 right-0 p-2 font-label-caps text-[9px] text-primary/40">SYS_CODE: STU_404</div>
-<div class="mb-8">
-<span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-4">school</span>
-<h3 class="font-headline-lg text-primary-fixed-dim uppercase mb-2 glow-cyan">Student CTF</h3>
-<p class="font-body-md text-on-surface-variant text-sm">Access for verified academic infiltrators. Includes CTF entry and basic workshops.</p>
-</div>
-<div>
-<div class="mb-6">
-<span class="text-display-lg text-4xl font-bold font-display-lg">$49</span>
-<span class="font-label-caps text-on-surface-variant text-[12px]">/ PASS</span>
-</div>
-<ul class="space-y-3 mb-8">
-<li class="flex items-center gap-2 font-body-md text-xs text-on-surface">
-<span class="material-symbols-outlined text-primary-fixed-dim text-sm">check_circle</span>
-                            CTF Qualifier Access
-                        </li>
-<li class="flex items-center gap-2 font-body-md text-xs text-on-surface">
-<span class="material-symbols-outlined text-primary-fixed-dim text-sm">check_circle</span>
-                            Discord "Scholar" Role
-                        </li>
-<li class="flex items-center gap-2 font-body-md text-xs text-on-surface-variant/60 line-through">
-                            VIP Networking Lounge
-                        </li>
-</ul>
-<button class="w-full py-4 border border-primary/40 text-primary-fixed-dim font-label-caps hover:bg-primary-fixed-dim hover:text-background transition-all uppercase tracking-widest text-xs">Initialize_Selection</button>
-</div>
-</div>
-<!-- Professional Tier (Featured) -->
-<div class="group relative bg-black border-2 border-secondary/60 p-8 flex flex-col justify-between scale-105 z-10 shadow-[0_0_30px_rgba(208,91,255,0.15)]">
-<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-on-secondary px-4 py-1 font-label-caps text-[10px] font-black tracking-tighter">RECOMMENDED_FOR_PROS</div>
-<div class="mb-8">
-<span class="material-symbols-outlined text-secondary text-4xl mb-4">terminal</span>
-<h3 class="font-headline-lg text-secondary uppercase mb-2 glow-magenta">Professional</h3>
-<p class="font-body-md text-on-surface-variant text-sm">Standard entry for industry specialists. Full conference access &amp; exclusive hardware badge.</p>
-</div>
-<div>
-<div class="mb-6">
-<span class="text-display-lg text-4xl font-bold font-display-lg">$299</span>
-<span class="font-label-caps text-on-surface-variant text-[12px]">/ PASS</span>
-</div>
-<ul class="space-y-3 mb-8">
-<li class="flex items-center gap-2 font-body-md text-xs text-on-surface">
-<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                            All Workshops &amp; Talks
-                        </li>
-<li class="flex items-center gap-2 font-body-md text-xs text-on-surface">
-<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                            Hardware Hacking Badge
-                        </li>
-<li class="flex items-center gap-2 font-body-md text-xs text-on-surface">
-<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
-                            Digital Certificate
-                        </li>
-</ul>
-<button class="w-full py-4 bg-secondary text-on-secondary font-label-caps font-black hover:brightness-125 transition-all uppercase tracking-widest text-xs">Execute_Access</button>
-</div>
-</div>
-<!-- VIP Tier -->
-<div class="group relative bg-surface-container-lowest/60 backdrop-blur-xl border border-white/10 p-8 flex flex-col justify-between hover:border-white/40 transition-all duration-300">
-<div class="absolute top-0 right-0 p-2 font-label-caps text-[9px] text-white/20">ACCESS_LEVEL: OMEGA</div>
-<div class="mb-8">
-<span class="material-symbols-outlined text-white text-4xl mb-4">verified</span>
-<h3 class="font-headline-lg text-white uppercase mb-2">VIP Access</h3>
-<p class="font-body-md text-on-surface-variant text-sm">The ultimate void experience. All-access, back-stage, and premium amenities.</p>
-</div>
-<div>
-<div class="mb-6">
-<span class="text-display-lg text-4xl font-bold font-display-lg">$899</span>
-<span class="font-label-caps text-on-surface-variant text-[12px]">/ PASS</span>
-</div>
-<ul class="space-y-3 mb-8">
-<li class="flex items-center gap-2 font-body-md text-xs text-on-surface">
-<span class="material-symbols-outlined text-white text-sm">check_circle</span>
-                            Black-Badge Lounge Access
-                        </li>
-<li class="flex items-center gap-2 font-body-md text-xs text-on-surface">
-<span class="material-symbols-outlined text-white text-sm">check_circle</span>
-                            Private Dinner with Speakers
-                        </li>
-<li class="flex items-center gap-2 font-body-md text-xs text-on-surface">
-<span class="material-symbols-outlined text-white text-sm">check_circle</span>
-                            Limited Edition Merch Kit
-                        </li>
-</ul>
-<button class="w-full py-4 border border-white/20 text-white font-label-caps hover:bg-white hover:text-black transition-all uppercase tracking-widest text-xs">Ascend_To_VIP</button>
-</div>
-</div>
-</section>
-<!-- Form Elements (Identity Verification Preview) -->
-<section class="mt-24 max-w-4xl mx-auto">
-<div class="bg-surface-container/30 border border-primary/10 p-10 rounded-xl">
-<div class="flex items-center gap-3 mb-10">
-<span class="w-8 h-8 bg-primary/20 flex items-center justify-center rounded-full text-primary font-bold">01</span>
-<h2 class="font-headline-lg text-primary uppercase">Identity_Verification</h2>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-<div class="flex flex-col gap-2">
-<label class="font-label-caps text-[10px] text-primary/60 uppercase tracking-[0.2em]">Full_Legal_Name</label>
-<div class="relative">
-<input class="terminal-input w-full bg-transparent border-t-0 border-x-0 border-b-2 border-primary/20 py-3 font-body-md text-primary placeholder:text-primary/20" placeholder="John_Doe_01" type="text"/>
-<div class="absolute bottom-0 left-0 h-[2px] bg-primary-fixed-dim w-0 transition-all duration-500"></div>
-</div>
-</div>
-<div class="flex flex-col gap-2">
-<label class="font-label-caps text-[10px] text-primary/60 uppercase tracking-[0.2em]">Contact_Node_Email</label>
-<div class="relative">
-<input class="terminal-input w-full bg-transparent border-t-0 border-x-0 border-b-2 border-primary/20 py-3 font-body-md text-primary placeholder:text-primary/20" placeholder="operator@void.core" type="email"/>
-</div>
-</div>
-<div class="flex flex-col gap-2">
-<label class="font-label-caps text-[10px] text-primary/60 uppercase tracking-[0.2em]">Country_of_Origin</label>
-<select class="terminal-input w-full bg-transparent border-t-0 border-x-0 border-b-2 border-primary/20 py-3 font-body-md text-primary focus:ring-0">
-<option class="bg-surface text-primary">SELECT_REGION</option>
-<option class="bg-surface text-primary">NORTH_AMERICA</option>
-<option class="bg-surface text-primary">EUROPE_ZONE_A</option>
-<option class="bg-surface text-primary">ASIA_PACIFIC</option>
-</select>
-</div>
-<div class="flex flex-col gap-2">
-<label class="font-label-caps text-[10px] text-primary/60 uppercase tracking-[0.2em]">Organization_Handle</label>
-<div class="relative">
-<input class="terminal-input w-full bg-transparent border-t-0 border-x-0 border-b-2 border-primary/20 py-3 font-body-md text-primary placeholder:text-primary/20" placeholder="SEC_VOID_INC" type="text"/>
-</div>
-</div>
-</div>
-<div class="mt-16 flex flex-col md:flex-row justify-between items-center gap-6 pt-10 border-t border-primary/10">
-<div class="flex items-center gap-3">
-<div class="w-3 h-3 bg-primary animate-pulse rounded-full"></div>
-<p class="font-body-md text-[10px] text-on-surface-variant uppercase italic">System awaiting input validation...</p>
-</div>
-<div class="flex gap-4">
-<button class="px-8 py-3 border border-on-surface-variant/20 text-on-surface-variant font-label-caps text-xs hover:bg-surface-container transition-all">BACK_STEP</button>
-<button class="px-8 py-3 bg-primary text-on-primary-container font-label-caps text-xs font-bold shadow-[0_0_15px_rgba(0,219,233,0.4)] hover:scale-105 active:scale-95 transition-all">COMMIT_AND_CONTINUE</button>
-</div>
-</div>
-</div>
-</section>
 </main>
 <!-- Footer Component -->
 <footer class="w-full bg-black/95 border-t border-primary/20 py-10">
