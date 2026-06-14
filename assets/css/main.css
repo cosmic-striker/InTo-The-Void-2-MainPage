@@ -167,7 +167,7 @@
         }
 /* 3D Hover Cards */
 :root {
-  --card-height: 400px;
+  --card-height: 480px;
   --card-width: calc(var(--card-height) / 1.5);
 }
 .card {
