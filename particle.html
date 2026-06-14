@@ -246,9 +246,16 @@
             H = canvas.height = window.innerHeight;
         }
         resize();
+        let lastW = window.innerWidth;
         window.addEventListener('resize', () => {
-            resize();
-            if (slidesReady) buildSlide();
+            const newW = window.innerWidth;
+            if (Math.abs(newW - lastW) > 50) {
+                lastW = newW;
+                resize();
+                if (slidesReady) buildSlide();
+            } else {
+                resize(); // Just update canvas dimensions, don't reset particles
+            }
         });
 
         // ── MOUSE ─────────────────────────────────────────────
