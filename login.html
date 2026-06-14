@@ -5,20 +5,14 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>INTO THE VOID 2.0 | SECURE TERMINAL</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="assets/js/tailwind-config.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="assets/css/responsive.css" rel="stylesheet"/>
+<link href="assets/css/main.css" rel="stylesheet"/>
+<link href="assets/css/navbar.css" rel="stylesheet"/>
 <style>
-        body {
-            background-color: #000000;
-            background-image: 
-                linear-gradient(rgba(0, 219, 233, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 219, 233, 0.03) 1px, transparent 1px);
-            background-size: 32px 32px;
-            position: relative;
-            overflow: hidden;
-        }
         body::after {
             content: "";
             position: fixed;
@@ -31,10 +25,7 @@
             pointer-events: none;
             z-index: 1000;
         }
-        .glitch-border {
-            box-shadow: 0 0 10px rgba(0, 219, 233, 0.2), inset 0 0 10px rgba(0, 219, 233, 0.1);
-        }
-        .scanline {
+        .login-scanline {
             width: 100%;
             height: 2px;
             background: rgba(0, 219, 233, 0.1);
@@ -46,108 +37,15 @@
             0% { top: 0; }
             100% { top: 100%; }
         }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "on-primary": "#00363a",
-                        "on-tertiary-fixed": "#380038",
-                        "tertiary-fixed-dim": "#ffabf3",
-                        "on-secondary-fixed-variant": "#75009e",
-                        "inverse-primary": "#006970",
-                        "secondary": "#ecb1ff",
-                        "on-background": "#e2e2e2",
-                        "on-error-container": "#ffdad6",
-                        "on-tertiary-container": "#a900a9",
-                        "inverse-on-surface": "#303030",
-                        "error": "#ffb4ab",
-                        "on-primary-container": "#006970",
-                        "surface-container": "#1f1f1f",
-                        "surface-container-highest": "#353535",
-                        "error-container": "#93000a",
-                        "secondary-container": "#d05bff",
-                        "primary-container": "#00f0ff",
-                        "surface-bright": "#393939",
-                        "surface-container-lowest": "#0e0e0e",
-                        "on-surface-variant": "#b9cacb",
-                        "tertiary-fixed": "#ffd7f5",
-                        "tertiary": "#fff3f9",
-                        "primary-fixed": "#7df4ff",
-                        "on-secondary": "#520070",
-                        "on-error": "#690005",
-                        "outline": "#849495",
-                        "surface-dim": "#131313",
-                        "on-primary-fixed-variant": "#004f54",
-                        "inverse-surface": "#e2e2e2",
-                        "tertiary-container": "#ffc9f4",
-                        "surface-container-low": "#1b1b1b",
-                        "background": "#131313",
-                        "surface-variant": "#353535",
-                        "on-secondary-container": "#480063",
-                        "surface-tint": "#00dbe9",
-                        "outline-variant": "#3b494b",
-                        "primary": "#dbfcff",
-                        "on-tertiary-fixed-variant": "#810081",
-                        "secondary-fixed-dim": "#ecb1ff",
-                        "primary-fixed-dim": "#00dbe9",
-                        "on-secondary-fixed": "#320046",
-                        "on-primary-fixed": "#002022",
-                        "surface-container-high": "#2a2a2a",
-                        "surface": "#131313",
-                        "on-tertiary": "#5b005b",
-                        "on-surface": "#e2e2e2",
-                        "secondary-fixed": "#f9d8ff"
-                    },
-                    "fontFamily": {
-                        "body-md": ["JetBrains Mono"],
-                        "label-caps": ["Space Mono"],
-                        "headline-lg": ["Space Grotesk"],
-                        "display-lg": ["Space Grotesk"]
-                    },
-                    "fontSize": {
-                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.15em", "fontWeight": "700"}],
-                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "500"}],
-                        "display-lg": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}]
-                    }
-                }
-            }
-        }
-    </script>
+</style>
 </head>
 <body class="bg-black text-on-surface min-h-screen flex flex-col font-body-md overflow-hidden selection:bg-primary-container selection:text-on-primary">
 <!-- TopNavBar -->
-<header class="liquid-navbar">
-<div class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop h-20 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full border border-primary/40 bg-surface-container-lowest flex items-center justify-center shadow-[0_0_10px_rgba(0,219,233,0.2)]">
-<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">hive</span>
-</div>
-<span class="font-display-lg text-headline-lg font-black text-primary dark:text-primary-fixed-dim uppercase italic">Into the Void 2.0</span>
-</div>
-<nav class="hidden md:flex items-center gap-8">
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps" href="index.html">Home</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps" href="event.html">Event</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps" href="fee.html">Registration</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps" href="sponsors.html">Sponser</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps" href="contact.html">Contect</a>
-</nav>
-<div class="flex items-center">
-<div class="w-10 h-10 rounded-full border border-secondary/40 bg-secondary/10 flex items-center justify-center overflow-hidden shadow-[0_0_10px_rgba(208,91,255,0.2)]">
-<span class="material-symbols-outlined text-secondary text-xl">person</span>
-</div>
-</div>
-</div>
-</header>
+<!-- TopNavBar Placeholder -->
+<div id="navbar-placeholder"></div>
 <!-- Main Content: Login Portal -->
 <main class="flex-grow flex items-center justify-center pt-24 px-margin-mobile relative">
-<div class="scanline"></div>
+<div class="login-scanline"></div>
 <!-- Background Decorative Elements -->
 <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
 <div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-[100px]"></div>
@@ -165,53 +63,84 @@
 </div>
 </div>
 <!-- Centralized Auth Box -->
-<div class="bg-surface-container-lowest/80 backdrop-blur-2xl border border-primary/30 glitch-border p-8 md:p-12 relative overflow-hidden">
+<div class="bg-surface-container-lowest/80 backdrop-blur-2xl border border-primary/30 p-8 md:p-12 relative overflow-hidden">
 <!-- Inner Decorative Accents -->
 <div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-secondary/40"></div>
 <div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-primary/40"></div>
-<!-- Breach Warning State (Active Simulation) -->
-<div class="mb-8 border border-error/50 bg-error-container/20 p-4 flex items-center gap-4">
-<span class="material-symbols-outlined text-error text-3xl animate-pulse">report</span>
-<div>
-<div class="text-error font-bold font-label-caps text-[12px] tracking-[0.2em] uppercase">System Failure: Unauthorized Breach</div>
-<div class="text-error/70 text-[10px] font-body-md">LATENCY_SPIKE_DETECTED: IP_SOURCE_EXTRACTED</div>
+<!-- Tabs -->
+<div class="flex border-b border-outline/20 mb-8 relative">
+    <button onclick="switchTab('login')" id="tab-login" type="button" class="flex-1 py-3 text-label-caps font-label-caps tracking-widest text-primary border-b-2 border-primary transition-all">LOGIN</button>
+    <button onclick="switchTab('register')" id="tab-register" type="button" class="flex-1 py-3 text-label-caps font-label-caps tracking-widest text-on-surface-variant hover:text-primary transition-all border-b-2 border-transparent">REGISTER</button>
 </div>
+
+<!-- Forms Container -->
+<div id="forms-container" class="relative">
+    <!-- Login Form -->
+    <form id="form-login" class="space-y-8" action="#" method="POST">
+        <div class="group relative">
+            <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2 text-[10px] tracking-widest uppercase" for="login_identity">
+                Username / Email
+            </label>
+            <div class="relative border-b border-outline/30 focus-within:border-primary-fixed-dim transition-all">
+                <input class="w-full bg-transparent border-none py-3 px-0 font-body-md text-primary placeholder:text-surface-variant focus:ring-0 outline-none" id="login_identity" placeholder="ENTER_IDENTITY" type="text" required/>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline/40 text-sm">person</span>
+            </div>
+        </div>
+        <div class="group relative">
+            <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2 text-[10px] tracking-widest uppercase" for="login_password">
+                Password
+            </label>
+            <div class="relative border-b border-outline/30 focus-within:border-secondary transition-all">
+                <input class="w-full bg-transparent border-none py-3 px-0 font-body-md text-secondary placeholder:text-surface-variant focus:ring-0 outline-none" id="login_password" placeholder="••••••••••••" type="password" required/>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline/40 text-sm">lock</span>
+            </div>
+            <div class="flex justify-end mt-3">
+                <a class="text-[10px] font-label-caps text-on-surface-variant hover:text-secondary transition-colors underline decoration-secondary/30 underline-offset-4" href="#">Forgot Password?</a>
+            </div>
+        </div>
+        <div class="pt-4">
+            <button class="w-full py-4 bg-primary-container text-on-primary-container font-headline-lg text-lg uppercase font-black italic tracking-widest hover:bg-white transition-all transform active:scale-95 shadow-[0_0_20px_rgba(0,219,233,0.4)]" type="submit">
+                LOGIN
+            </button>
+        </div>
+    </form>
+
+    <!-- Register Form -->
+    <form id="form-register" class="space-y-8 hidden" action="#" method="POST">
+        <div class="group relative">
+            <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2 text-[10px] tracking-widest uppercase" for="reg_username">
+                Username
+            </label>
+            <div class="relative border-b border-outline/30 focus-within:border-primary-fixed-dim transition-all">
+                <input class="w-full bg-transparent border-none py-3 px-0 font-body-md text-primary placeholder:text-surface-variant focus:ring-0 outline-none" id="reg_username" placeholder="CHOOSE_IDENTITY" type="text" required/>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline/40 text-sm">badge</span>
+            </div>
+        </div>
+        <div class="group relative">
+            <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2 text-[10px] tracking-widest uppercase" for="reg_email">
+                Email Address
+            </label>
+            <div class="relative border-b border-outline/30 focus-within:border-primary-fixed-dim transition-all">
+                <input class="w-full bg-transparent border-none py-3 px-0 font-body-md text-primary placeholder:text-surface-variant focus:ring-0 outline-none" id="reg_email" placeholder="ENTER_EMAIL" type="email" required/>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline/40 text-sm">mail</span>
+            </div>
+        </div>
+        <div class="group relative">
+            <label class="block text-label-caps font-label-caps text-on-surface-variant mb-2 text-[10px] tracking-widest uppercase" for="reg_password">
+                Password
+            </label>
+            <div class="relative border-b border-outline/30 focus-within:border-secondary transition-all">
+                <input class="w-full bg-transparent border-none py-3 px-0 font-body-md text-secondary placeholder:text-surface-variant focus:ring-0 outline-none" id="reg_password" placeholder="••••••••••••" type="password" required/>
+                <span class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline/40 text-sm">lock</span>
+            </div>
+        </div>
+        <div class="pt-4">
+            <button class="w-full py-4 bg-primary-container text-on-primary-container font-headline-lg text-lg uppercase font-black italic tracking-widest hover:bg-white transition-all transform active:scale-95 shadow-[0_0_20px_rgba(0,219,233,0.4)]" type="submit">
+                REGISTER
+            </button>
+        </div>
+    </form>
 </div>
-<form class="space-y-10">
-<!-- Access Code Input -->
-<div class="group relative">
-<label class="block text-label-caps font-label-caps text-on-surface-variant mb-2 text-[10px] tracking-widest uppercase" for="access_code">
-                            [01] Access Code
-                        </label>
-<div class="relative border-b border-outline/30 focus-within:border-primary-fixed-dim transition-all">
-<input class="w-full bg-transparent border-none py-3 px-0 font-body-md text-primary placeholder:text-surface-variant focus:ring-0" id="access_code" placeholder="ENTER_UID_SEQUENCE" type="text"/>
-<span class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline/40 text-sm">fingerprint</span>
-</div>
-</div>
-<!-- Cipher Sequence Input -->
-<div class="group relative">
-<label class="block text-label-caps font-label-caps text-on-surface-variant mb-2 text-[10px] tracking-widest uppercase" for="cipher">
-                            [02] Cipher Sequence
-                        </label>
-<div class="relative border-b border-outline/30 focus-within:border-secondary transition-all">
-<input class="w-full bg-transparent border-none py-3 px-0 font-body-md text-secondary placeholder:text-surface-variant focus:ring-0" id="cipher" placeholder="••••••••••••" type="password"/>
-<span class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline/40 text-sm">key_visualizer</span>
-</div>
-</div>
-<!-- Actions -->
-<div class="flex flex-col gap-4 pt-4">
-<button class="w-full py-4 bg-primary-container text-on-primary-container font-headline-lg text-lg uppercase font-black italic tracking-widest hover:bg-white transition-all transform active:scale-95 shadow-[0_0_20px_rgba(0,219,233,0.4)]" type="submit">
-                            Authorize Session
-                        </button>
-<div class="flex justify-between items-center px-1">
-<a class="text-[10px] font-label-caps text-on-surface-variant hover:text-secondary transition-colors underline decoration-secondary/30 underline-offset-4" href="#">RESET_ENCRYPTION</a>
-<a class="text-[10px] font-label-caps text-primary hover:text-white transition-colors flex items-center gap-2" href="#">
-<span>Enroll in Matrix</span>
-<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-</a>
-</div>
-</div>
-</form>
 <!-- Status Ticker -->
 <div class="mt-12 flex justify-between items-center text-[9px] font-label-caps text-outline/30">
 <div class="flex gap-4">
@@ -305,4 +234,29 @@
 </div>
 <script src="assets/js/footer-links.js"></script>
 <script src="assets/js/smooth-scroll.js"></script>
+<script src="assets/js/navbar.js"></script>
+<script>
+    function switchTab(tab) {
+        const loginForm = document.getElementById('form-login');
+        const registerForm = document.getElementById('form-register');
+        const loginTab = document.getElementById('tab-login');
+        const registerTab = document.getElementById('tab-register');
+
+        if (tab === 'login') {
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+            loginTab.classList.add('text-primary', 'border-primary');
+            loginTab.classList.remove('text-on-surface-variant', 'border-transparent');
+            registerTab.classList.add('text-on-surface-variant', 'border-transparent');
+            registerTab.classList.remove('text-primary', 'border-primary');
+        } else {
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+            registerTab.classList.add('text-primary', 'border-primary');
+            registerTab.classList.remove('text-on-surface-variant', 'border-transparent');
+            loginTab.classList.add('text-on-surface-variant', 'border-transparent');
+            loginTab.classList.remove('text-primary', 'border-primary');
+        }
+    }
+</script>
 </body></html>
