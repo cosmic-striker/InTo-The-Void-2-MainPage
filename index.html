@@ -368,81 +368,100 @@
 </section>
 
         
-<section id="registration" class="pt-12 pb-16 px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto">
-<div class="relative z-10 w-full mt-2">
+<section id="registration" class="scroll-mt-24 pt-4 pb-16 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+<div class="flex items-center justify-between mb-8 border-b border-primary/20 pb-4">
+    <div class="flex items-center gap-4">
+        <h2 class="font-headline-lg text-headline-lg text-primary tracking-tight uppercase">Registration</h2>
+        <div class="h-2 w-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#00dbe9]"></div>
+    </div>
+    <div class="font-label-caps text-label-caps text-on-surface-variant">INITIALIZE_UPLINK</div>
+</div>
 
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch relative z-10 w-full mt-2">
+    
+    <!-- Left Side: Image -->
+    <div class="relative w-full h-full min-h-[500px] gaming-clip overflow-hidden border border-primary/30 group">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-90"></div>
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP_0SONeu6N0x-IfmQyVI3ZDNIlYfmZBNEr0shDNc0daiKfFc-UmtSF6uxqnScT0Q67PPQ1iUDyUENd9m7TJtpPJYU4sm-OYZU6yI26liQoX41DYdbY8PWhLYPxCO2vwJ-l2C0x309qvcNUXukn0-MEITSwZs7tXY1aJjrA-a-8kWlSkymG8Se85drnq_e-lgEbYxyEFCrdHXbHB2W1ZSMXIGVsLCCWA8EjJPkjUjkluziVuCavB28icDdOYjTTHYPn8clKzAN-EQ" 
+             alt="Registration Neural Uplink" 
+             class="w-full h-full object-cover object-center grayscale-[0.3] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+        <div class="absolute bottom-8 left-8 z-20">
+            <h3 class="font-display-lg text-headline-lg text-primary uppercase italic drop-shadow-[0_0_10px_#00dbe9]">Secure Uplink</h3>
+            <p class="font-label-caps text-[12px] text-primary/60 tracking-widest uppercase mt-2">Node Authorization Required</p>
+        </div>
+    </div>
 
-    <!-- Gaming Panel Container -->
-    <div class="relative p-[2px] gaming-clip group">
+    <!-- Right Side: Gaming Panel Container -->
+<div class="relative p-[2px] gaming-clip group">
         <!-- Animated RGB Border Background -->
         <div class="absolute inset-0 z-[-1] bg-gradient-to-r from-[#00dbe9] via-[#d05bff] to-[#00dbe9] bg-[length:200%_200%] animate-[rgb-border_3s_ease_infinite] opacity-70 group-hover:opacity-100 transition-opacity duration-500"></div>
         
         <!-- Inner Black Panel -->
-        <div class="bg-black/90 backdrop-blur-xl p-10 gaming-clip relative z-10 h-full">
-            <form class="grid grid-cols-1 md:grid-cols-2 gap-8 relative text-white">
+        <div class="bg-black/90 backdrop-blur-xl p-6 gaming-clip relative z-10 h-full">
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-4 relative text-white">
                 
                 <div class="flex flex-col gap-2">
                     <label class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Name</label>
-                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="Enter your full name" required type="text"/>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-2 px-3 font-body-md text-sm text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="Enter your full name" required type="text"/>
                 </div>
 
                 <div class="flex flex-col gap-2">
                     <label class="font-label-caps text-[10px] text-secondary uppercase tracking-widest">Email ID</label>
-                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="user@domain.com" required type="email"/>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-2 px-3 font-body-md text-sm text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="user@domain.com" required type="email"/>
                 </div>
 
                 <div class="flex flex-col gap-2">
                     <label class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Mobile Number</label>
-                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="+91 9876543210" required type="tel"/>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-2 px-3 font-body-md text-sm text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="+91 9876543210" required type="tel"/>
                 </div>
 
                 <div class="flex flex-col gap-2">
                     <label class="font-label-caps text-[10px] text-secondary uppercase tracking-widest">College Name</label>
-                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="Name of Institution" required type="text"/>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-2 px-3 font-body-md text-sm text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="Name of Institution" required type="text"/>
                 </div>
 
                 <div class="flex flex-col gap-2">
                     <label class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Degree</label>
-                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="E.g., B.Tech, B.E, B.Sc" required type="text"/>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-2 px-3 font-body-md text-sm text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="E.g., B.Tech, B.E, B.Sc" required type="text"/>
                 </div>
 
                 <div class="flex flex-col gap-2">
                     <label class="font-label-caps text-[10px] text-secondary uppercase tracking-widest">Department</label>
-                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="E.g., Computer Science, IT" required type="text"/>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-2 px-3 font-body-md text-sm text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="E.g., Computer Science, IT" required type="text"/>
                 </div>
 
                 <div class="flex flex-col gap-2">
                     <label class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Year of Study</label>
                     <div class="relative">
-                        <select class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none appearance-none" required>
+                        <select class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-primary/30 p-2 px-3 font-body-md text-sm text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none appearance-none" required>
                             <option value="" class="bg-black text-white">Select Year</option>
                             <option value="1" class="bg-black text-white">1st Year</option>
                             <option value="2" class="bg-black text-white">2nd Year</option>
                             <option value="3" class="bg-black text-white">3rd Year</option>
                             <option value="4" class="bg-black text-white">4th Year</option>
                         </select>
-                        <span class="material-symbols-outlined absolute right-4 top-4 pointer-events-none text-primary/50">expand_more</span>
+                        <span class="material-symbols-outlined absolute right-3 top-2.5 pointer-events-none text-primary/50">expand_more</span>
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-2">
                     <label class="font-label-caps text-[10px] text-secondary uppercase tracking-widest">Location</label>
-                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="City / District" required type="text"/>
+                    <input class="gaming-input-clip w-full bg-surface-container-lowest/50 border border-secondary/30 p-2 px-3 font-body-md text-sm text-white placeholder:text-white/20 focus:border-secondary focus:bg-secondary/10 transition-all outline-none" placeholder="City / District" required type="text"/>
                 </div>
 
                 <div class="flex flex-col gap-2 md:col-span-2">
                     <label class="font-label-caps text-[10px] text-primary uppercase tracking-widest">Pincode</label>
-                    <input class="gaming-input-clip w-full md:w-1/2 bg-surface-container-lowest/50 border border-primary/30 p-4 font-body-md text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="Postal Code" required type="text"/>
+                    <input class="gaming-input-clip w-full md:w-1/2 bg-surface-container-lowest/50 border border-primary/30 p-2 px-3 font-body-md text-sm text-white placeholder:text-white/20 focus:border-primary focus:bg-primary/10 transition-all outline-none" placeholder="Postal Code" required type="text"/>
                 </div>
 
-                <div class="md:col-span-2 mt-12 flex justify-center">
-                    <button type="submit" class="relative px-16 py-6 bg-primary/20 text-primary font-label-caps font-bold text-lg uppercase tracking-[0.2em] hover:bg-primary hover:text-black transition-all duration-300 shadow-[0_0_20px_rgba(0,219,233,0.3)] hover:shadow-[0_0_40px_rgba(0,219,233,0.8)] gaming-clip border border-primary">
+                <div class="md:col-span-2 mt-6 flex justify-center">
+                    <button type="submit" class="relative px-10 py-3 bg-primary/20 text-primary font-label-caps font-bold text-lg uppercase tracking-[0.2em] hover:bg-primary hover:text-black transition-all duration-300 shadow-[0_0_20px_rgba(0,219,233,0.3)] hover:shadow-[0_0_40px_rgba(0,219,233,0.8)] gaming-clip border border-primary">
                         INITIALIZE_UPLINK
                     </button>
                 </div>
             </form>
         </div>
-    </div>
+    
 </div>
 </section>
 
@@ -608,7 +627,7 @@
         </script>
 
         
-<div id="sponsors" class="pt-12 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+<div id="sponsors" class="scroll-mt-24 pt-4 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
 <!-- Hero Section -->
 <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-16">
 <div class="md:col-span-12 mb-8">
@@ -802,7 +821,7 @@
 
     </main>
     
-<div id="contact" class="pt-12 pb-16 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+<div id="contact" class="scroll-mt-24 pt-16 pb-16 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
 <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
 <!-- Transmit Packet Form (Left Section) -->
 <section class="md:col-span-7 flex flex-col gap-8">
