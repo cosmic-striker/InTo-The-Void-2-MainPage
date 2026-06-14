@@ -48,16 +48,34 @@
             z-index: 10;
             pointer-events: none;
             user-select: none;
+            opacity: 0; /* hidden until Phase 3 */
         }
+        #titles.revealed { opacity: 1; }
+
+        /* Each letter wrapped in a span */
+        .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px) scale(0.7);
+            transition: none;
+        }
+        .char.in {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.23,1,0.32,1);
+        }
+
         #titles h1 {
             font-family: 'Space Grotesk', sans-serif;
             font-size: clamp(28px, 5vw, 72px);
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 0.25em;
-            text-shadow: 0 0 20px rgba(0,219,233,0.9), 0 0 50px rgba(0,255,170,0.5);
-            animation: glitch 4s infinite;
             line-height: 1;
+            white-space: nowrap;
+        }
+        #titles h1.glitch-loop {
+            animation: glitch 3.5s infinite 1s;
         }
         #titles h2 {
             font-size: clamp(11px, 1.8vw, 22px);
@@ -71,7 +89,21 @@
             color: rgba(0,219,233,0.6);
             letter-spacing: 0.5em;
             margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.6s ease;
         }
+        #titles .tagline.in { opacity: 1; }
+
+        /* Divider line that draws itself */
+        .title-divider {
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00ffaa, #00dbe9, transparent);
+            margin: 16px auto 0;
+            box-shadow: 0 0 8px #00ffaa;
+            transition: width 0.8s ease;
+        }
+        .title-divider.in { width: min(420px, 80vw); }
 
         /* Progress HUD */
         #hud {
@@ -154,13 +186,16 @@
 
         /* Glitch keyframes */
         @keyframes glitch {
-            0%,100% { text-shadow: 0 0 20px rgba(0,219,233,0.9), 0 0 50px rgba(0,255,170,0.5); transform: translate(0,0); }
-            2%       { text-shadow: -3px 0 #ff003c, 3px 0 #00dbe9; transform: translate(-2px,1px) skewX(2deg); }
-            4%       { text-shadow: 3px 0 #ff003c,-3px 0 #00dbe9; transform: translate(2px,-1px) skewX(-2deg); }
-            6%       { text-shadow: 0 0 20px rgba(0,219,233,0.9); transform: translate(0,0); }
-            52%      { text-shadow: -2px 0 #00dbe9; transform: translate(1px,2px); }
-            54%      { text-shadow: 2px 0 #ff003c; transform: translate(-1px,-2px); }
-            56%      { text-shadow: 0 0 20px rgba(0,219,233,0.9); transform: translate(0,0); }
+            0%,89%,100% { text-shadow: 0 0 20px rgba(0,219,233,0.9), 0 0 50px rgba(0,255,170,0.5); transform: translate(0,0) skewX(0); }
+            90% { text-shadow: -4px 0 #ff003c, 4px 0 #00dbe9; transform: translate(-3px,1px) skewX(3deg); clip-path: inset(10% 0 80% 0); }
+            91% { text-shadow: 4px 0 #ff003c,-4px 0 #00dbe9; transform: translate(3px,-1px) skewX(-3deg); clip-path: inset(60% 0 10% 0); }
+            92% { text-shadow: 0 0 20px rgba(0,219,233,0.9); transform: translate(0,0) skewX(0); clip-path: none; }
+            95% { text-shadow: -2px 0 #00dbe9; transform: translate(1px,2px); }
+            96% { text-shadow: 2px 0 #ff003c; transform: translate(-1px,-2px); }
+            97% { text-shadow: 0 0 20px rgba(0,219,233,0.9); transform: translate(0,0); }
+        }
+        @keyframes flicker {
+            0%,100% { opacity:1; } 92% { opacity:1; } 93% { opacity:0.4; } 94% { opacity:1; } 96% { opacity:0.6; } 97% { opacity:1; }
         }
 
         @media (max-width: 600px) {
@@ -185,9 +220,10 @@
     <div id="overlay-flash"></div>
 
     <div id="titles">
-        <h1>INTO THE VOID 2.0</h1>
-        <h2>MULTIVERSE OF THE MATRIX</h2>
-        <div class="tagline">EXPLOITX // SYSTEM BREACH IN PROGRESS</div>
+        <h1 id="title-h1"></h1>
+        <div class="title-divider" id="title-divider"></div>
+        <h2 id="title-h2"></h2>
+        <div class="tagline" id="title-tagline">EXPLOITX &nbsp;// &nbsp;SYSTEM BREACH COMPLETE</div>
     </div>
 
     <div id="hud">
@@ -544,7 +580,15 @@
 
             // ── PHASE 3: MATRIX FALL ──
             } else {
-                if (enterBtn.style.display !== 'block') {
+                const phase3T = t - (LOAD_TIME + FLASH_DUR);
+
+                // Trigger text reveal once
+                if (!window._textRevealed) {
+                    window._textRevealed = true;
+                    revealTitles();
+                }
+
+                if (phase3T > 2.5 && enterBtn.style.display !== 'block') {
                     enterBtn.style.display = 'block';
                     requestAnimationFrame(() => enterBtn.style.opacity = '1');
                 }
@@ -561,10 +605,80 @@
                 ptLight.intensity = 2 + Math.sin(t * 2) * 1;
 
                 bloom.strength = 1.9 + Math.sin(t * 2.5) * 0.45;
-                titlesEl.style.opacity = String(0.85 + Math.sin(t * 9) * 0.08);
             }
 
             composer.render();
+        }
+
+        // ── TEXT REVEAL FUNCTION ──────────────────────────
+        function revealTitles() {
+            const h1Text = 'INTO THE VOID 2.0';
+            const h2Text = 'MULTIVERSE OF THE MATRIX';
+            const h1El   = document.getElementById('title-h1');
+            const h2El   = document.getElementById('title-h2');
+            const divEl  = document.getElementById('title-divider');
+            const tagEl  = document.getElementById('title-tagline');
+
+            // Build spans for h1
+            h1El.innerHTML = h1Text.split('').map(c =>
+                `<span class="char">${c === ' ' ? '&nbsp;' : c}</span>`
+            ).join('');
+
+            // Build spans for h2
+            h2El.innerHTML = h2Text.split('').map(c =>
+                `<span class="char">${c === ' ' ? '&nbsp;' : c}</span>`
+            ).join('');
+
+            titlesEl.style.opacity = '1';
+            titlesEl.classList.add('revealed');
+
+            const h1Chars = h1El.querySelectorAll('.char');
+            const h2Chars = h2El.querySelectorAll('.char');
+
+            // Stagger h1 characters in
+            h1Chars.forEach((span, i) => {
+                setTimeout(() => {
+                    // Brief glitch: show a random char first
+                    const orig = span.innerText;
+                    const GLITCH_CHARS = '@#$%&*01アカサタ';
+                    span.classList.add('in');
+                    let flips = 0;
+                    const glitchId = setInterval(() => {
+                        if (flips < 3) {
+                            span.innerText = GLITCH_CHARS[Math.floor(Math.random()*GLITCH_CHARS.length)];
+                            span.style.color = '#00dbe9';
+                            flips++;
+                        } else {
+                            clearInterval(glitchId);
+                            span.innerText = orig === '\u00a0' ? '\u00a0' : orig;
+                            span.style.color = '';
+                        }
+                    }, 50);
+                }, i * 55);
+            });
+
+            // h2 comes in after h1 finishes
+            const h1Delay = h1Chars.length * 55 + 200;
+            setTimeout(() => {
+                divEl.classList.add('in');
+            }, h1Delay - 100);
+
+            h2Chars.forEach((span, i) => {
+                setTimeout(() => {
+                    span.classList.add('in');
+                }, h1Delay + i * 40);
+            });
+
+            // Tagline fades in last
+            setTimeout(() => {
+                tagEl.classList.add('in');
+            }, h1Delay + h2Chars.length * 40 + 400);
+
+            // Add continuous glitch loop to h1 after full reveal
+            setTimeout(() => {
+                h1El.classList.add('glitch-loop');
+                h1El.style.animation = 'glitch 3.5s infinite, flicker 4s infinite';
+            }, h1Delay + h2Chars.length * 40 + 800);
         }
 
         window.addEventListener('resize', () => {
