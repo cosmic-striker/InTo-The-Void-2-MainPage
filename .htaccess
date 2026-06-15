@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteBase /
+
+# 1. Redirect .html URLs to extensionless (External Redirect)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# 2. Serve .html file internally when extension is missing (Internal Rewrite)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]Copied!   

@@ -25,22 +25,23 @@
 
     <!-- TopNavBar Placeholder -->
     <div id="navbar-placeholder"></div>
-    <main class="pt-20">
+    <main>
         <!-- Hero Section: Fractured Multiverse -->
         <section id="home"
             class="relative min-h-[calc(100vh-80px)] flex flex-col items-center justify-center overflow-hidden py-12 px-margin-mobile md:px-margin-desktop ">
             <div class="absolute inset-0 z-0 overflow-hidden">
                 <iframe src="particle.html" class="w-full h-full border-none pointer-events-auto"
-                    style="transform: translateY(-9px);"></iframe> <div id="multiverse-scene">
+                    style="transform: translateY(-9px);"></iframe>
+                <div id="multiverse-scene">
                     <img src="assets/images/castle.png" class="realm castle">
                     <img src="assets/images/orageworld.png" class="realm orange">
                     <img src="assets/images/cybercity.png" class="realm cyber">
-                    
+
 
                     <img src="assets/images/ironman.png" class="realm ironman">
                     <img src="assets/images/pyramid.png" class="realm pyramid">
                     <img src="assets/images/galaxy.png" class="realm galaxy">
-                    
+
                 </div>
                 <div
                     class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-50% to-black to-80% pointer-events-none">
@@ -112,6 +113,52 @@
                 </div>
 
             </div>
+
+
+            <dev class="absolute font-label-caps"
+                style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 50; display: flex; align-items: center; gap: 12px; white-space: nowrap; pointer-events: none;">
+                <span style="
+                    font-family: 'Space Mono', 'JetBrains Mono', monospace;
+                    font-size: 15px;
+                    letter-spacing: 0.35em;
+                    color: rgba(255, 255, 255, 0.7);
+                    text-transform: uppercase;
+                    font-weight: 700;
+                ">INTO THE VOID</span>
+                <span style="
+                    width: 2px;
+                    height: 14px;
+                    background: #00dbea;
+                    display: inline-block;
+                    flex-shrink: 0;
+                    box-shadow: 0 0 8px rgba(0, 219, 233, 0.8);
+                "></span>
+                <span style="
+                    font-family: 'Space Mono', 'JetBrains Mono', monospace;
+                    font-size: 18px;
+                    letter-spacing: 0.15em;
+                    font-weight: 700;
+                    background: linear-gradient(90deg, #00dbea, #a259ff, #00dbea);
+                    background-size: 200% auto;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    text-shadow: 0 0 10px rgba(162, 89, 255, 0.2);
+                    animation: voidGlowShift 3s linear infinite;
+                    text-transform: uppercase;
+                ">2.0</span>
+                <style>
+                    @keyframes voidGlowShift {
+                        0% {
+                            background-position: 0% center;
+                        }
+
+                        100% {
+                            background-position: 200% center;
+                        }
+                    }
+                </style>
+            </dev>
         </section>
         <!-- Main Content: Temporal Log -->
         <section id="event" class="mb-16 pt-16 mt-20">
@@ -198,28 +245,32 @@
 
 
         <section id="registration" class="pt-16 pb-24 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
-    <div class="flex flex-wrap justify-center items-center gap-32">
-        <a href="ctf.html" alt="Mythrill" >
-            <div class="card">
-                <div class="wrapper">
-                    <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-cover.jpg" class="cover-image" />
-                </div>
-                <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-title.png" class="title" />
-                <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-character.webp" class="character" />
-            </div>
-        </a>
+            <div class="flex flex-wrap justify-center items-center gap-32">
+                <a href="ctf.html" alt="Mythrill">
+                    <div class="card">
+                        <div class="wrapper">
+                            <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-cover.jpg"
+                                class="cover-image" />
+                        </div>
+                        <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-title.png" class="title" />
+                        <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-character.webp"
+                            class="character" />
+                    </div>
+                </a>
 
-        <a href="conference.html" alt="Mythrill" >
-            <div class="card">
-                <div class="wrapper">
-                    <img src="https://ggayane.github.io/css-experiments/cards/force_mage-cover.jpg" class="cover-image" />
-                </div>
-                <img src="https://ggayane.github.io/css-experiments/cards/force_mage-title.png" class="title" />
-                <img src="https://ggayane.github.io/css-experiments/cards/force_mage-character.webp" class="character" />
+                <a href="conference.html" alt="Mythrill">
+                    <div class="card">
+                        <div class="wrapper">
+                            <img src="https://ggayane.github.io/css-experiments/cards/force_mage-cover.jpg"
+                                class="cover-image" />
+                        </div>
+                        <img src="https://ggayane.github.io/css-experiments/cards/force_mage-title.png" class="title" />
+                        <img src="https://ggayane.github.io/css-experiments/cards/force_mage-character.webp"
+                            class="character" />
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-</section>
+        </section>
 
         <!-- ── HYPER SCROLL: Embedded Inline 3D Section ── -->
         <!-- This container is TALL so scrolling drives the 3D camera. The viewport inside is sticky. -->
@@ -288,8 +339,8 @@
                         multiverse infrastructure. These visionary organizations provide the technology, resources, and
                         support that make Into the Void 2.0 possible.</p>
                 </div> -->
-                <!-- Platinum Sponsors -->
-                <!-- <div
+            <!-- Platinum Sponsors -->
+            <!-- <div
                     class="md:col-span-6 group relative overflow-hidden bg-surface-container-low border border-primary/30 p-8 hover:border-primary transition-all backdrop-blur-md">
                     <div class="absolute top-4 right-4 text-[10px] font-label-caps text-primary/40">TIER: PLATINUM</div>
                     <div class="mb-6 flex items-center justify-between">
@@ -392,8 +443,9 @@
             <!-- Sponsor Showcase (Now Matrix Animation) -->
             <section class="mb-16 flex flex-col items-center overflow-hidden">
                 <div class="border-matrix w-full">
-                   <h1 class="font-display-lg text-headline-xl text-primary tracking-tight uppercase mb-8 text-center" style="text-shadow: 0 0 10px rgba(0,219,233,0.5);">Pov: You Made Good Choices.</h1>
-                   <div id="matrix"></div>
+                    <h1 class="font-display-lg text-headline-xl text-primary tracking-tight uppercase mb-8 text-center"
+                        style="text-shadow: 0 0 10px rgba(0,219,233,0.5);">Pov: You Made Good Choices.</h1>
+                    <div id="matrix"></div>
                 </div>
                 <canvas id="canvas" style="display:none;"></canvas>
             </section>
@@ -528,7 +580,7 @@
             <div>© 2124 MULTIVERSE_CORE. ALL RIGHTS RESERVED. [RESTRICTED ACCESS]</div>
             <div class="flex flex-wrap items-center justify-center gap-6">
                 <a class="hover:text-primary transition-all" href="terms.html">PROTOCOL_TC</a>
-                
+
                 <a class="hover:text-primary transition-all" href="privacy.html">PRIVACY_ENCRYPT</a>
                 <a class="hover:text-primary transition-all" href="sitemap.html">SITEMAP_DIR</a>
             </div>
