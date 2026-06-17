@@ -489,7 +489,7 @@
                 let pixelData = getImagePixels(img);
 
                 // Cap at 30K particles for performance
-                const MAX_PARTICLES = 5000;
+                const MAX_PARTICLES = 10000;
                 if (pixelData.length > MAX_PARTICLES) {
                     // Evenly downsample
                     const ratio = Math.ceil(pixelData.length / MAX_PARTICLES);
