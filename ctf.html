@@ -441,7 +441,7 @@
                                 class="w-full bg-transparent border-none focus:ring-0 px-4 pb-4 text-secondary outline-none" />
 
                             <datalist id="soloCollegeList">
-                                <option value="Chennai Institute of Technology"></option>
+                                <option value="CHENNAI INSTITUTE OF TECHNOLOGY"></option>
 
                             </datalist>
                         </div>
@@ -602,7 +602,7 @@
                                 class="w-full bg-transparent border-none focus:ring-0 px-4 pb-4 text-secondary outline-none" />
 
                             <datalist id="leaderCollegeList">
-                                <option value="Chennai Institute of Technology"></option>
+                                <option value="CHENNAI INSTITUTE OF TECHNOLOGY"></option>
                             </datalist>
                         </div>
 
@@ -710,7 +710,7 @@
                                 class="w-full bg-transparent border-none focus:ring-0 px-4 pb-4 text-secondary outline-none" />
 
                             <datalist id="memberCollegeList">
-                                <option value="Chennai Institute of Technology"></option>
+                                <option value="CHENNAI INSTITUTE OF TECHNOLOGY"></option>
                             </datalist>
                         </div>
                         <!-- Degree -->
@@ -1505,7 +1505,7 @@
 
             errorBanner.classList.add('hidden');
             submitBtn.disabled = true;
-            submitBtn.innerText = 'INITIALIZING UPLINK...';
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin inline-block align-middle mr-2">sync</span> INITIALIZING UPLINK...';
 
             try {
                 let payload = { registration_type: formType === 'team' ? 'couple' : 'solo' };
