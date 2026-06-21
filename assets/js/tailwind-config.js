@@ -85,3 +85,27 @@ tailwind.config = {
         }
     }
 }
+
+// --- Fancy Console Effect ---
+const _iv2_style1 = [
+  'color: #00f0ff',
+  'background: #131313',
+  'font-size: 24px',
+  'font-weight: bold',
+  'padding: 10px 20px',
+  'border: 2px solid #00f0ff',
+  'border-radius: 5px',
+  'text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff'
+].join(';');
+
+const _iv2_style2 = [
+  'color: #d05bff',
+  'font-size: 14px',
+  'font-family: monospace',
+  'padding: 5px 0'
+].join(';');
+
+console.log('%c🌌 INTO THE VOID 2.0 🌌', _iv2_style1);
+console.log('%cWelcome to the matrix... Developer tools detected.', _iv2_style2);
+console.log('%cReady to hack? Join the CTF and prove your worth!', _iv2_style2);
+
