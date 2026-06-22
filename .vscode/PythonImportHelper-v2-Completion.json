@@ -1,0 +1,101 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "glob",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "glob",
+        "description": "glob",
+        "detail": "glob",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "create_page",
+        "kind": 2,
+        "importPath": "setup_policies",
+        "description": "setup_policies",
+        "peekOfCode": "def create_page(filename, title, subtitle, content_html):\n    # Quick and dirty replacement of the main content area in the terms template\n    # Replace header text\n    page = terms_html.replace(\"Legal Cipher &amp; Terms of Engagement\", title)\n    page = page.replace(\"SECURE_DOCUMENT_0X7F4\", subtitle)\n    # Replace content section\n    start_tag = '<!-- Content Cards (Glassmorphism) -->'\n    end_tag = '<!-- Footer -->'\n    start_idx = page.find(start_tag)\n    end_idx = page.find(end_tag)",
+        "detail": "setup_policies",
+        "documentation": {}
+    },
+    {
+        "label": "dir_path",
+        "kind": 5,
+        "importPath": "setup_policies",
+        "description": "setup_policies",
+        "peekOfCode": "dir_path = \"/home/vishal/Documents/test/into-the-void2/InTo-The-Void-2-MainPage\"\n# Base HTML for new pages (adapted from terms.html)\nwith open(os.path.join(dir_path, \"terms.html\"), \"r\") as f:\n    terms_html = f.read()\ndef create_page(filename, title, subtitle, content_html):\n    # Quick and dirty replacement of the main content area in the terms template\n    # Replace header text\n    page = terms_html.replace(\"Legal Cipher &amp; Terms of Engagement\", title)\n    page = page.replace(\"SECURE_DOCUMENT_0X7F4\", subtitle)\n    # Replace content section",
+        "detail": "setup_policies",
+        "documentation": {}
+    },
+    {
+        "label": "contact_content",
+        "kind": 5,
+        "importPath": "setup_policies",
+        "description": "setup_policies",
+        "peekOfCode": "contact_content = \"\"\"\n<section class=\"relative p-8 bg-surface-container-lowest/60 backdrop-blur-xl border border-primary/20 rounded-lg\">\n<h2 class=\"font-headline-lg text-primary-fixed-dim mb-6 flex items-center gap-4\">\n<span class=\"material-symbols-outlined\" data-icon=\"contact_support\">contact_support</span>\n01. CONTACT_US\n</h2>\n<div class=\"font-body-md text-on-surface-variant leading-relaxed space-y-4\">\n<p>For any queries, please reach out to us:</p>\n<p>Email: <a href=\"mailto:exploitx@citchennai.net\" class=\"text-primary\">exploitx@citchennai.net</a></p>\n<p>Address: Chennai Institute of Technology, Sarathy Nagar, Kundrathur, Chennai, Tamil Nadu 600069</p>",
+        "detail": "setup_policies",
+        "documentation": {}
+    },
+    {
+        "label": "refunds_content",
+        "kind": 5,
+        "importPath": "setup_policies",
+        "description": "setup_policies",
+        "peekOfCode": "refunds_content = \"\"\"\n<section class=\"relative p-8 bg-surface-container-lowest/60 backdrop-blur-xl border border-primary/20 rounded-lg\">\n<h2 class=\"font-headline-lg text-primary-fixed-dim mb-6 flex items-center gap-4\">\n<span class=\"material-symbols-outlined\" data-icon=\"receipt_long\">receipt_long</span>\n01. REFUNDS_&_CANCELLATIONS\n</h2>\n<div class=\"font-body-md text-on-surface-variant leading-relaxed space-y-4\">\n<p>1. Refund Policy: All ticket sales are final. We do not offer refunds once the registration fee is paid, unless the event is canceled by the organizers.</p>\n<p>2. Cancellations: In the event of a cancellation by the organizers, a full refund will be processed to the original payment method within 7-10 business days.</p>\n<p>3. Non-transferable: Registrations and tickets are non-transferable to other individuals or teams.</p>",
+        "detail": "setup_policies",
+        "documentation": {}
+    },
+    {
+        "label": "products_content",
+        "kind": 5,
+        "importPath": "setup_policies",
+        "description": "setup_policies",
+        "peekOfCode": "products_content = \"\"\"\n<section class=\"relative p-8 bg-surface-container-lowest/60 backdrop-blur-xl border border-primary/20 rounded-lg\">\n<h2 class=\"font-headline-lg text-primary-fixed-dim mb-6 flex items-center gap-4\">\n<span class=\"material-symbols-outlined\" data-icon=\"inventory\">inventory</span>\n01. PRODUCTS_&_SERVICES\n</h2>\n<div class=\"font-body-md text-on-surface-variant leading-relaxed space-y-4\">\n<p>We offer the following events and services for registration:</p>\n<ul class=\"list-disc pl-8 space-y-2\">\n<li><strong>Void CTF Registration (Solo)</strong>: ₹ 200 INR (Early Bird), Original ₹ 400 INR</li>",
+        "detail": "setup_policies",
+        "documentation": {}
+    },
+    {
+        "label": "html_files",
+        "kind": 5,
+        "importPath": "setup_policies",
+        "description": "setup_policies",
+        "peekOfCode": "html_files = glob.glob(os.path.join(dir_path, \"*.html\"))\nfooter_pattern = re.compile(\n    r'<div class=\"flex flex-wrap items-center justify-center gap-6\">\\s*<a class=\"hover:text-primary transition-all\" href=\"terms\\.html\">PROTOCOL_TC</a>\\s*(?:<br/>\\s*)?<a class=\"hover:text-primary transition-all\" href=\"privacy\\.html\">PRIVACY_ENCRYPT</a>\\s*<a class=\"hover:text-primary transition-all\" href=\"sitemap\\.html\">SITEMAP_DIR</a>\\s*</div>',\n    re.MULTILINE\n)\nnew_footer = \"\"\"<div class=\"flex flex-wrap items-center justify-center gap-6\">\n<a class=\"hover:text-primary transition-all\" href=\"terms.html\">PROTOCOL_TC</a>\n<a class=\"hover:text-primary transition-all\" href=\"privacy.html\">PRIVACY_ENCRYPT</a>\n<a class=\"hover:text-primary transition-all\" href=\"refunds.html\">REFUNDS_CANCEL</a>\n<a class=\"hover:text-primary transition-all\" href=\"contact.html\">CONTACT_US</a>",
+        "detail": "setup_policies",
+        "documentation": {}
+    },
+    {
+        "label": "footer_pattern",
+        "kind": 5,
+        "importPath": "setup_policies",
+        "description": "setup_policies",
+        "peekOfCode": "footer_pattern = re.compile(\n    r'<div class=\"flex flex-wrap items-center justify-center gap-6\">\\s*<a class=\"hover:text-primary transition-all\" href=\"terms\\.html\">PROTOCOL_TC</a>\\s*(?:<br/>\\s*)?<a class=\"hover:text-primary transition-all\" href=\"privacy\\.html\">PRIVACY_ENCRYPT</a>\\s*<a class=\"hover:text-primary transition-all\" href=\"sitemap\\.html\">SITEMAP_DIR</a>\\s*</div>',\n    re.MULTILINE\n)\nnew_footer = \"\"\"<div class=\"flex flex-wrap items-center justify-center gap-6\">\n<a class=\"hover:text-primary transition-all\" href=\"terms.html\">PROTOCOL_TC</a>\n<a class=\"hover:text-primary transition-all\" href=\"privacy.html\">PRIVACY_ENCRYPT</a>\n<a class=\"hover:text-primary transition-all\" href=\"refunds.html\">REFUNDS_CANCEL</a>\n<a class=\"hover:text-primary transition-all\" href=\"contact.html\">CONTACT_US</a>\n<a class=\"hover:text-primary transition-all\" href=\"products.html\">PRODUCTS_SERVICES</a>",
+        "detail": "setup_policies",
+        "documentation": {}
+    },
+    {
+        "label": "new_footer",
+        "kind": 5,
+        "importPath": "setup_policies",
+        "description": "setup_policies",
+        "peekOfCode": "new_footer = \"\"\"<div class=\"flex flex-wrap items-center justify-center gap-6\">\n<a class=\"hover:text-primary transition-all\" href=\"terms.html\">PROTOCOL_TC</a>\n<a class=\"hover:text-primary transition-all\" href=\"privacy.html\">PRIVACY_ENCRYPT</a>\n<a class=\"hover:text-primary transition-all\" href=\"refunds.html\">REFUNDS_CANCEL</a>\n<a class=\"hover:text-primary transition-all\" href=\"contact.html\">CONTACT_US</a>\n<a class=\"hover:text-primary transition-all\" href=\"products.html\">PRODUCTS_SERVICES</a>\n<a class=\"hover:text-primary transition-all\" href=\"sitemap.html\">SITEMAP_DIR</a>\n</div>\"\"\"\nfor filepath in html_files:\n    with open(filepath, \"r\") as f:",
+        "detail": "setup_policies",
+        "documentation": {}
+    }
+]
