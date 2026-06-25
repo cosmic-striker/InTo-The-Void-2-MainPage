@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Into The Void 2.0 — Loading</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
     <style>
@@ -10,6 +11,12 @@
 
         /* Three.js canvas sits at z=0 */
         #three-canvas { position: absolute; top: 0; left: 0; z-index: 1; }
+
+        #void-video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 3;
+            transition: opacity 0.5s ease;
+        }
 
         /* Matrix rain canvas sits above Three.js, below UI */
         #rain-canvas {
@@ -200,6 +207,22 @@
 
         @media (max-width: 600px) {
             #hud { bottom: 11vh; }
+            #titles h1 {
+                font-size: 24px;
+                letter-spacing: 0.1em;
+                white-space: normal;
+                line-height: 1.3;
+            }
+            #titles h2 {
+                font-size: 11px;
+                letter-spacing: 0.15em;
+            }
+            #enter-btn {
+                padding: 12px 32px;
+                font-size: 14px;
+                width: 85%;
+                letter-spacing: 4px;
+            }
         }
     </style>
     <script type="importmap">
@@ -213,7 +236,8 @@
 </head>
 <body>
 
-    <!-- Layer order (z-index): Three.js(1) → Rain(2) → Scanlines(4) → CinBars(5) → UI(10) → Flash(20) → Button(30) -->
+    <!-- Layer order (z-index): Three.js(1) → Rain(2) → VoidVideo(3) → Scanlines(4) → CinBars(5) → UI(10) → Flash(20) → Button(30) -->
+    <video id="void-video" src="assets/void.mp4" autoplay muted playsinline webkit-playsinline></video>
     <canvas id="rain-canvas"></canvas>
     <div id="cinematic-bars"></div>
     <div id="scanlines"></div>
@@ -344,6 +368,7 @@
         scene.add(voidGroup, matrixGroup);
 
         // ── BLACK HOLE CORE ───────────────────────────────
+        /*
         voidGroup.add(new THREE.Mesh(
             new THREE.SphereGeometry(2, 64, 64),
             new THREE.MeshBasicMaterial({ color: 0x000000 })
@@ -404,6 +429,7 @@
             new THREE.SphereGeometry(2.4, 32, 32),
             new THREE.MeshBasicMaterial({ color: 0x00dbe9, transparent: true, opacity: 0.25, blending: THREE.AdditiveBlending, side: THREE.BackSide })
         ));
+        */
 
         // Star field
         const starGeo = new THREE.BufferGeometry();
@@ -419,7 +445,7 @@
         const starSystem = new THREE.Points(starGeo, new THREE.PointsMaterial({
             size: 0.22, vertexColors: true, blending: THREE.AdditiveBlending, transparent: true, opacity: 0.85
         }));
-        voidGroup.add(starSystem);
+        // voidGroup.add(starSystem);
 
         // ── MATRIX MONOLITHS ─────────────────────────────
         function makeMatrixTex() {
@@ -495,7 +521,17 @@
         let pageHidden = false;
         document.addEventListener('visibilitychange', () => { pageHidden = document.hidden; });
         const clock = new THREE.Clock();
-        const LOAD_TIME = 10;   // seconds for phase 1
+        
+        let LOAD_TIME = 10;   // seconds for phase 1 (will be overwritten by video duration)
+        const voidVidElement = document.getElementById('void-video');
+        if (voidVidElement) {
+            voidVidElement.addEventListener('loadedmetadata', () => {
+                if (voidVidElement.duration && !isNaN(voidVidElement.duration)) {
+                    LOAD_TIME = voidVidElement.duration;
+                }
+            });
+        }
+        
         const FLASH_DUR  = 1.5;
         let isTransitioned = false;
         let rainPhase = 'void';
@@ -540,11 +576,11 @@
                 camera.position.y += (Math.random()-.5) * shake;
                 camera.rotation.z  = Math.sin(t * 0.8) * 0.08 * p;
 
-                diskShader.uniforms.uTime.value = t;
-                disk.rotation.z -= 0.035 + p * 0.45;
+                // diskShader.uniforms.uTime.value = t;
+                // disk.rotation.z -= 0.035 + p * 0.45;
 
-                starSystem.position.z += 0.8 + p * 22;
-                if (starSystem.position.z > 175) starSystem.position.z = -175;
+                // starSystem.position.z += 0.8 + p * 22;
+                // if (starSystem.position.z > 175) starSystem.position.z = -175;
 
                 // Titles zoom subtly
                 titlesEl.style.transform = `translate(-50%,-50%) scale(${1 + p * 0.12})`;
@@ -564,6 +600,8 @@
                     rainPhase = 'matrix';
 
                     voidGroup.visible   = false;
+                    const voidVid = document.getElementById('void-video');
+                    if (voidVid) voidVid.style.opacity = '0';
                     matrixGroup.visible = true;
                     scene.fog.color.setHex(0x000804);
                     scene.fog.density = 0.008;
@@ -624,12 +662,12 @@
 
             // Build spans for h1
             h1El.innerHTML = h1Text.split('').map(c =>
-                `<span class="char">${c === ' ' ? '&nbsp;' : c}</span>`
+                c === ' ' ? ' ' : `<span class="char">${c}</span>`
             ).join('');
 
             // Build spans for h2
             h2El.innerHTML = h2Text.split('').map(c =>
-                `<span class="char">${c === ' ' ? '&nbsp;' : c}</span>`
+                c === ' ' ? ' ' : `<span class="char">${c}</span>`
             ).join('');
 
             titlesEl.style.opacity = '1';
