@@ -1794,12 +1794,12 @@
                 }
 
                 const options = {
-                    key: data.key, // Ensure your backend provides the razorpay key
-                    amount: data.amount,
+                    key: data.rzp_key_id, // Based on the provided example
+                    amount: String(data.amount * 100),
                     currency: data.currency || "INR",
-                    name: "ExploitX",
-                    description: "CTF Registration",
-                    order_id: data.order_id || data.id,
+                    name: "ExploitX, Org.",
+                    description: "Into The Void 2.0 Registration",
+                    order_id: data.rzp_order_id,
                     handler: async function(r) {
                         payBtn.innerText = 'VERIFYING PAYMENT...';
                         try {
