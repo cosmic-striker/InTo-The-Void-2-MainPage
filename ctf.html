@@ -1793,53 +1793,75 @@
                     throw new Error(data.message || 'Payment initiation failed');
                 }
 
-                const options = {
-                    key: data.rzp_key_id, // Based on the provided example
-                    amount: String(data.amount * 100),
-                    currency: data.currency || "INR",
-                    name: "ExploitX, Org.",
-                    description: "Into The Void 2.0 Registration",
-                    order_id: data.rzp_order_id,
-                    handler: async function(r) {
-                        payBtn.innerText = 'VERIFYING PAYMENT...';
-                        try {
-                            await fetch(BACKEND_URL + '_/api/v1/pub/payment/verify-payment', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({
-                                    razorpay_order_id: r.razorpay_order_id,
-                                    razorpay_payment_id: r.razorpay_payment_id,
-                                    razorpay_signature: r.razorpay_signature
-                                })
-                            });
-                            window.location.href = '/payment/status?email=' + encodeURIComponent(leaderEmail);
-                        } catch (e) {
-                            console.error(e);
-                            window.location.href = '/payment/status?email=' + encodeURIComponent(leaderEmail);
+                const initRazorpay = () => {
+                    const options = {
+                        key: data.rzp_key_id,
+                        amount: String(data.amount * 100),
+                        currency: data.currency || "INR",
+                        name: "ExploitX, Org.",
+                        description: "Into The Void 2.0 Registration",
+                        order_id: data.rzp_order_id,
+                        handler: async function(r) {
+                            payBtn.innerText = 'VERIFYING PAYMENT...';
+                            try {
+                                await fetch(BACKEND_URL + '_/api/v1/pub/payment/verify-payment', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                        razorpay_order_id: r.razorpay_order_id,
+                                        razorpay_payment_id: r.razorpay_payment_id,
+                                        razorpay_signature: r.razorpay_signature
+                                    })
+                                });
+                                window.location.href = '/payment/status?email=' + encodeURIComponent(leaderEmail);
+                            } catch (e) {
+                                console.error(e);
+                                window.location.href = '/payment/status?email=' + encodeURIComponent(leaderEmail);
+                            }
+                        },
+                        prefill: {
+                            email: leaderEmail,
+                            contact: isSolo ? document.getElementById('soloPhone').value : document.getElementById('teamLeaderPhone').value
+                        },
+                        theme: {
+                            color: "#00dbe9"
+                        },
+                        modal: {
+                            ondismiss: function() {
+                                window.location.href = '/payment/status?email=' + encodeURIComponent(leaderEmail);
+                            }
                         }
-                    },
-                    prefill: {
-                        email: leaderEmail,
-                        contact: isSolo ? document.getElementById('soloPhone').value : document.getElementById('teamLeaderPhone').value
-                    },
-                    theme: {
-                        color: "#00dbe9"
-                    },
-                    modal: {
-                        ondismiss: function() {
-                            window.location.href = '/payment/status?email=' + encodeURIComponent(leaderEmail);
-                        }
-                    }
+                    };
+
+                    const rzp = new window.Razorpay(options);
+                    rzp.on('payment.failed', function (response) {
+                        errorEl.innerText = '⚠ Payment failed. ' + response.error.description;
+                        errorEl.classList.remove('hidden');
+                        payBtn.disabled = false;
+                        payBtn.innerText = originalText;
+                    });
+                    rzp.open();
                 };
 
-                const rzp = new window.Razorpay(options);
-                rzp.on('payment.failed', function (response) {
-                    errorEl.innerText = '⚠ Payment failed. ' + response.error.description;
-                    errorEl.classList.remove('hidden');
-                    payBtn.disabled = false;
-                    payBtn.innerText = originalText;
-                });
-                rzp.open();
+                // Dynamically load script to catch AdBlocker blocking it
+                if (!window.Razorpay) {
+                    const script = document.createElement('script');
+                    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+                    script.onload = () => initRazorpay();
+                    script.onerror = () => {
+                        if (data.rzp_payment_link || data.payment_link) {
+                            window.location.href = data.rzp_payment_link || data.payment_link;
+                        } else {
+                            errorEl.innerText = '⚠ Adblocker prevented payment gateway. Please disable it to pay.';
+                            errorEl.classList.remove('hidden');
+                            payBtn.disabled = false;
+                            payBtn.innerText = originalText;
+                        }
+                    };
+                    document.head.appendChild(script);
+                } else {
+                    initRazorpay();
+                }
             } catch (err) {
                 errorEl.innerText = '⚠ ' + err.message;
                 errorEl.classList.remove('hidden');
