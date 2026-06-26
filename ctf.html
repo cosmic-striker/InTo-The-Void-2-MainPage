@@ -1801,6 +1801,19 @@
                         name: "ExploitX, Org.",
                         description: "Into The Void 2.0 Registration",
                         order_id: data.rzp_order_id,
+                        prefill: {
+                            name: 'Leader',
+                            contact: data.leader_mobile || (isSolo ? document.getElementById('soloPhone').value : document.getElementById('teamLeaderPhone').value),
+                            email: data.leader_email || leaderEmail
+                        },
+                        config: {
+                            display: {
+                                hide: [],
+                                preferences: {
+                                    show_default_blocks: true
+                                }
+                            }
+                        },
                         handler: async function(r) {
                             payBtn.innerText = 'VERIFYING PAYMENT...';
                             try {
@@ -1818,10 +1831,6 @@
                                 console.error(e);
                                 window.location.href = '/payment/status?email=' + encodeURIComponent(leaderEmail);
                             }
-                        },
-                        prefill: {
-                            email: leaderEmail,
-                            contact: isSolo ? document.getElementById('soloPhone').value : document.getElementById('teamLeaderPhone').value
                         },
                         theme: {
                             color: "#00dbe9"
@@ -1843,24 +1852,32 @@
                     rzp.open();
                 };
 
-                // Dynamically load script to catch AdBlocker blocking it
-                if (!window.Razorpay) {
-                    const script = document.createElement('script');
-                    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-                    script.onload = () => initRazorpay();
-                    script.onerror = () => {
-                        if (data.rzp_payment_link || data.payment_link) {
-                            window.location.href = data.rzp_payment_link || data.payment_link;
-                        } else {
-                            errorEl.innerText = '⚠ Adblocker prevented payment gateway. Please disable it to pay.';
-                            errorEl.classList.remove('hidden');
-                            payBtn.disabled = false;
-                            payBtn.innerText = originalText;
-                        }
-                    };
-                    document.head.appendChild(script);
+                if (data.provider === 'razorpay') {
+                    // Dynamically load script to catch AdBlocker blocking it
+                    if (!window.Razorpay) {
+                        const script = document.createElement('script');
+                        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+                        script.onload = () => initRazorpay();
+                        script.onerror = () => {
+                            if (data.rzp_payment_link || data.payment_link) {
+                                window.location.href = data.rzp_payment_link || data.payment_link;
+                            } else {
+                                errorEl.innerText = '⚠ Adblocker prevented payment gateway. Please disable it to pay.';
+                                errorEl.classList.remove('hidden');
+                                payBtn.disabled = false;
+                                payBtn.innerText = originalText;
+                            }
+                        };
+                        document.head.appendChild(script);
+                    } else {
+                        initRazorpay();
+                    }
+                } else if (data.cf_payment_link) {
+                    window.location.href = data.cf_payment_link;
+                } else if (data.payment_link) {
+                    window.location.href = data.payment_link;
                 } else {
-                    initRazorpay();
+                    throw new Error('No supported payment method returned by server');
                 }
             } catch (err) {
                 errorEl.innerText = '⚠ ' + err.message;
