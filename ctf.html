@@ -1271,15 +1271,9 @@
                         if (vStatus) detailsArr.push(`Verification: ${vStatus}`);
                         const detailsStr = detailsArr.length > 0 ? detailsArr.join(' | ') : '';
 
-                        if (vStatus === 'pending') {
-                            fieldStates[fieldId] = { status: 'pending', value: value, error: '' };
-                            updateFieldUI(fieldId, 'available', `⚠ ${config.label} is pending verification. Submit to continue.`);
-                            verificationCache[config.type][cacheKey] = { found: true, pending: true };
-                        } else {
-                            fieldStates[fieldId] = { status: 'error', value: value, error: errMsg, details: detailsStr };
-                            updateFieldUI(fieldId, 'error', errMsg, detailsStr);
-                            verificationCache[config.type][cacheKey] = { found: true, error: errMsg, details: detailsStr };
-                        }
+                        fieldStates[fieldId] = { status: 'error', value: value, error: errMsg, details: detailsStr };
+                        updateFieldUI(fieldId, 'error', errMsg, detailsStr);
+                        verificationCache[config.type][cacheKey] = { found: true, error: errMsg, details: detailsStr, rawData: data };
                     } else {
                         fieldStates[fieldId] = { status: 'available', value: value, error: '' };
                         updateFieldUI(fieldId, 'available', `✅ ${config.label} is available`);
@@ -1361,6 +1355,17 @@
                     if (!firstInvalidField) firstInvalidField = inputEl;
                     if (!errorMessage) errorMessage = `Submission blocked: ${fieldsConfig[fieldId].label} has invalid format.`;
                 } else if (state.status === 'error') {
+                    const config = fieldsConfig[fieldId];
+                    const cacheKey = val.toLowerCase();
+                    const cacheInfo = verificationCache[config.type] && verificationCache[config.type][cacheKey];
+                    if (cacheInfo && cacheInfo.rawData) {
+                        const raw = cacheInfo.rawData;
+                        const vStatus = raw.leader_status || raw.member_status || (raw.leader_verified ? 'verified' : 'pending');
+                        const pStatus = raw.payment_status;
+                        if (vStatus === 'pending' || pStatus === 'unpaid') {
+                            continue;
+                        }
+                    }
                     if (!firstInvalidField) firstInvalidField = inputEl;
                     if (!errorMessage) errorMessage = `Submission blocked: ${fieldsConfig[fieldId].label} is already registered.`;
                 } else if (state.status === 'network_error') {
@@ -1580,8 +1585,28 @@
 
                 const data = await response.json().catch(() => ({ message: 'Invalid server response' }));
 
-                if (!response.ok && data.next_step !== 'resend_verification') {
-                    if (data.verified === false) {
+                if (!response.ok) {
+                    throw new Error(data.message || `Server error: ${response.status}`);
+                }
+
+                if (response.status === 200 && data.next_step) {
+                    if (data.next_step === 'proceed_to_payment') {
+                        try {
+                            const payResp = await fetch(BACKEND_URL + '_/api/v1/pub/payment/create-order', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ email: payload.leader_email_id })
+                            });
+                            const payData = await payResp.json();
+                            if (payData.cf_payment_link) {
+                                window.location.href = payData.cf_payment_link;
+                                return;
+                            }
+                        } catch (e) {
+                            console.error(e);
+                        }
+                        throw new Error("Unable to generate payment link.");
+                    } else if (data.next_step === 'resend_verification') {
                         try {
                             const resendResp = await fetch(BACKEND_URL + '_/api/v1/pub/auth/resend-otp', {
                                 method: 'POST',
@@ -1592,25 +1617,12 @@
                         } catch (e) {
                             console.error(e);
                         }
+                        window.registeredData = data;
                         showOtpCard();
                         return;
-                    } else if (data.verified === true && data.payment === false) {
-                        try {
-                            const payResp = await fetch(BACKEND_URL + '_/api/v1/pub/payment/create-order', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ email: payload.leader_email_id })
-                            });
-                            const payData = await payResp.json();
-                            if (payData.payment_link) {
-                                window.location.href = payData.payment_link;
-                                return;
-                            }
-                        } catch (e) {
-                            console.error(e);
-                        }
+                    } else if (data.next_step === 'none') {
+                        throw new Error(data.message || 'Already fully registered.');
                     }
-                    throw new Error(data.message || `Server error: ${response.status}`);
                 }
 
                 window.registeredData = data;
